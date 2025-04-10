@@ -1,7 +1,7 @@
 .about {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 
 .about h1 {
@@ -23,4 +23,36 @@
 
 .about-content p {
   margin-bottom: 1.5rem;
+}
+
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+  .about {
+    padding: 1.5rem 1rem;
+  }
+
+  .about h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-content {
+    font-size: 1rem;
+  }
+
+  .about-content h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 1rem;
+  }
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+  .about h1 {
+    font-size: 1.8rem;
+  }
+
+  .about-content h2 {
+    font-size: 1.3rem;
+  }
 }

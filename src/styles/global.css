@@ -1,10 +1,89 @@
+/* Estilos globais */
 :root {
+  /* Tema claro (padrão) */
   --primary-color: #1a1a1a;
   --text-color: #2c3e50;
   --background-color: #ffffff;
   --accent-color: #3498db;
+  --card-bg: #ffffff;
+  --hover-color: #f5f5f5;
+  --border-color: rgba(0,0,0,0.1);
+  
+  /* Animações globais */
+  --transition-speed: 0.3s;
 }
 
+[data-theme="dark"] {
+  --primary-color: #ffffff;
+  --text-color: #e0e0e0;
+  --background-color: #1a1a1a;
+  --accent-color: #64b5f6;
+  --card-bg: #2c2c2c;
+  --hover-color: #333333;
+  --border-color: rgba(255,255,255,0.1);
+}
+
+/* Animação de transição para troca de tema */
+body {
+  transition: 
+    background-color var(--transition-speed),
+    color var(--transition-speed);
+}
+
+/* Efeito de loading skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(to right, #f6f7f8 8%, #edeef1 18%, #f6f7f8 33%);
+  background-size: 800px 104px;
+  animation: shimmer 1.5s linear infinite;
+}
+
+/* Estilo da seleção de texto */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-color);
+}
+
+:-moz-selection {
+  background: var(--selection-bg);
+  color: var(--selection-color);
+}
+
+/* Estilização da scrollbar - Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px; /* Reduzido para ficar mais fino */
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+  border-radius: 4px; /* Reduzido o arredondamento */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px; /* Reduzido o arredondamento */
+  border: 2px solid var(--scrollbar-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* Estilização da scrollbar - Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+}
+
+/* Mantendo os estilos existentes */
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +95,7 @@ body {
   color: var(--text-color);
   background-color: var(--background-color);
   line-height: 1.6;
+  cursor: default;
 }
 
 .app-container {
@@ -29,11 +109,41 @@ body {
   width: 100%;
 }
 
-a {
+/* Cursor para elementos clicáveis */
+a,
+button,
+.clickable {
   color: var(--accent-color);
   text-decoration: none;
+  cursor: pointer;
 }
 
 a:hover {
   text-decoration: underline;
+}
+
+/* Cursor para elementos de texto selecionável */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: text;
+}
+
+/* Cursor para elementos interativos */
+input,
+textarea,
+select {
+  cursor: text;
+}
+
+/* Cursor para elementos desabilitados */
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  cursor: not-allowed;
 }

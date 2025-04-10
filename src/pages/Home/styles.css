@@ -41,27 +41,74 @@
 }
 
 .post-card {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 2rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+
+  /* Configuração 3D melhorada */
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Sombra inicial suave */
+  box-shadow:
+    0 4px 8px rgba(0,0,0,0.05),
+    0 1px 3px rgba(0,0,0,0.1);
+}
+
+.post-card:hover {
+  box-shadow:
+    0 20px 25px rgba(0,0,0,0.1),
+    0 10px 10px rgba(0,0,0,0.04);
+}
+
+/* Efeito suave nos elementos internos */
+.post-card h3,
+.post-card p,
+.category-tag,
+.post-meta,
+.read-more {
+  transition: transform 0.3s ease;
+  transform: translateZ(50px);
 }
 
 .post-card:last-child {
   border-bottom: none;
 }
 
+.category-tag {
+  position: absolute;
+  top: 1.5rem;  /* Ajustado para o novo padding */
+  right: 1.5rem;  /* Ajustado para o novo padding */
+  background: var(--accent-color);
+  color: white;
+  padding: 0.4rem 1rem;  /* Aumentado o padding */
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  z-index: 1;
+}
+
 .post-meta {
   font-size: 0.9rem;
   color: var(--text-color);
   opacity: 0.7;
-  margin-bottom: 0.5rem;
+  margin: 1.5rem 0;  /* Aumentado a margem */
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;  /* Aumentado o gap */
+  flex-wrap: wrap;
 }
 
 .post-card h3 {
   font-family: 'Lora', serif;
-  font-size: 1.8rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;  /* Aumentado a margem */
+  line-height: 1.4;  /* Aumentado o line-height */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .post-card h3 a {
@@ -76,20 +123,25 @@
 
 .post-card p {
   color: var(--text-color);
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  line-height: 1.7;  /* Aumentado o line-height */
+  margin-bottom: 1.5rem;  /* Aumentado a margem */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .read-more {
+  display: inline-block;
+  margin-top: 1rem;  /* Aumentado a margem */
+  padding: 0.5rem 0;  /* Adicionado padding vertical */
   color: var(--accent-color);
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: opacity 0.2s;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
 .read-more:hover {
-  opacity: 0.8;
-  text-decoration: none;
+  transform: translateX(5px);  /* Pequena animação no hover */
 }
 
 .view-all {
@@ -109,6 +161,7 @@
   text-decoration: none;
 }
 
+/* Ajuste para dispositivos móveis */
 @media (max-width: 768px) {
   .home {
     padding: 2rem 1rem;
@@ -123,6 +176,92 @@
   }
 
   .post-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
+
+  .post-card p {
+    font-size: 0.95rem;
+  }
+
+  .post-card {
+    padding: 1.5rem;
+  }
+
+  .post-meta {
+    margin: 1rem 0;
+    gap: 1rem;
+  }
+
+  .category-tag {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .featured-posts h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* Estilo base para elementos clicáveis */
+.post-card,
+.post-card h3 a,
+.read-more,
+.category-tag {
+  cursor: pointer;
+}
+
+/* Estilo específico para links dentro do card */
+.post-card h3 a {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.post-card h3 a:hover {
+  color: var(--accent-color);
+}
+
+/* Estilo especial para o botão read more */
+.read-more {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.read-more:hover {
+  transform: translateX(5px);
+}
+
+/* Estilo para a tag de categoria */
+.category-tag {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+
+
+/* Estilo para o card inteiro */
+.post-card {
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 20px 25px rgba(0,0,0,0.1),
+    0 10px 10px rgba(0,0,0,0.04);
+}
+
+/* Desativa o cursor pointer no conteúdo de texto não clicável */
+.post-card p,
+.post-meta {
+  cursor: default;
 }

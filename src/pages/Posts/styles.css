@@ -1,5 +1,7 @@
 .posts {
-  padding: 2rem 0;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .posts h1 {
@@ -12,4 +14,28 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+}
+
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+  .posts {
+    padding: 1.5rem 1rem;
+  }
+
+  .posts h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+  .posts h1 {
+    font-size: 1.8rem;
+  }
 }

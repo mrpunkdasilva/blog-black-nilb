@@ -1,11 +1,30 @@
 .post {
   max-width: 800px;
   margin: 0 auto;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
 }
 
 .post h1 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   font-family: 'Lora', serif;
+}
+
+/* Ajuste para dispositivos móveis */
+@media (max-width: 768px) {
+  .post {
+    padding: 1.5rem 1rem;
+  }
+
+  .post h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+  .post h1 {
+    font-size: 1.8rem;
+  }
 }
