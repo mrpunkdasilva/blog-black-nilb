@@ -1,0 +1,11 @@
+.post {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.post h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Lora', serif;
+}

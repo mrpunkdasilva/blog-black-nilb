@@ -1,0 +1,26 @@
+.about {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.about h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-family: 'Lora', serif;
+}
+
+.about-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.about-content h2 {
+  font-size: 1.8rem;
+  margin: 2rem 0 1rem;
+  font-family: 'Lora', serif;
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+}
