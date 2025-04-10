@@ -1,41 +1,126 @@
 .posts {
-  padding: 2rem 1rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 4rem 1rem;
 }
 
 .posts h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
   font-family: 'Lora', serif;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--primary-color);
+  text-align: center;
 }
 
 .posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
 }
 
-/* Ajuste para dispositivos móveis */
+/* Estilos do PostCard */
+.post-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--border-color);
+  position: relative;
+}
+
+.post-card h3 {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+}
+
+.post-card h3 a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.post-card h3 a:hover {
+  color: var(--accent-color);
+}
+
+.post-card p {
+  color: var(--text-color);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.category-tag {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--accent-color);
+  color: var(--background-color);
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 1.5rem 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.read-more {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
   .posts {
-    padding: 1.5rem 1rem;
+    padding: 2rem 1rem;
   }
 
   .posts h1 {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .posts-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+  }
+
+  .post-card {
+    padding: 1.5rem;
+  }
+
+  .post-card h3 {
+    font-size: 1.3rem;
+  }
+
+  .category-tag {
+    top: 1rem;
+    right: 1rem;
   }
 }
 
-/* Ajuste para telas muito pequenas */
 @media (max-width: 480px) {
   .posts h1 {
     font-size: 1.8rem;
+  }
+
+  .post-card h3 {
+    font-size: 1.2rem;
   }
 }
