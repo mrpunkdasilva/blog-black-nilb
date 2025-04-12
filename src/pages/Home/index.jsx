@@ -1,34 +1,18 @@
-import { Link } from 'react-router-dom'
-import './styles.css'
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { postService } from '../../services/api';
+import { PostGridSkeleton } from '../../components/Skeleton';
+import ErrorMessage from '../../components/ErrorMessage';
+import './styles.css';
 
 function Home() {
-  // Dados simulados para featured posts
-  const featuredPosts = [
-    {
-      id: 1,
-      title: "The Art of Minimal Design",
-      excerpt: "Exploring the principles of minimalism in modern web design",
-      date: "2024-03-15",
-      readTime: "5 min read",
-      category: "Design"
-    },
-    {
-      id: 2,
-      title: "Building Sustainable Software",
-      excerpt: "How to create maintainable and environmentally conscious applications",
-      date: "2024-03-12",
-      readTime: "8 min read",
-      category: "Development"
-    },
-    {
-      id: 3,
-      title: "Typography in Web Design",
-      excerpt: "The impact of font choices on user experience and readability",
-      date: "2024-03-10",
-      readTime: "6 min read",
-      category: "Design"
-    }
-  ]
+  const { data: featuredPosts, isLoading, error } = useQuery({
+    queryKey: ['featuredPosts'],
+    queryFn: postService.getFeaturedPosts,
+  });
+
+  if (isLoading) return <PostGridSkeleton count={3} />;
+  if (error) return <ErrorMessage message="Failed to load featured posts" />;
 
   return (
     <div className="home">
@@ -41,7 +25,7 @@ function Home() {
         <h2>Latest Writing</h2>
         <div className="posts-list">
           {featuredPosts.map(post => (
-            <PostCard key={post.id} post={post} />
+            <PostCard key={post._id} post={post} />
           ))}
         </div>
         
@@ -52,7 +36,7 @@ function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
 function PostCard({ post }) {

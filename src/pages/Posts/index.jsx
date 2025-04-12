@@ -1,70 +1,52 @@
-import { Link } from 'react-router-dom'
-import './styles.css'
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
+import { postService } from '../../services/api';
+import { PostGridSkeleton } from '../../components/Skeleton';
+import ErrorMessage from '../../components/ErrorMessage';
+import './styles.css';
 
 function Posts() {
-  // Dados simulados para todos os posts
-  const allPosts = [
-    {
-      id: 1,
-      title: "The Art of Minimal Design",
-      excerpt: "Exploring the principles of minimalism in modern web design",
-      date: "2024-03-15",
-      readTime: "5 min read",
-      category: "Design"
-    },
-    {
-      id: 2,
-      title: "Building Sustainable Software",
-      excerpt: "How to create maintainable and environmentally conscious applications",
-      date: "2024-03-12",
-      readTime: "8 min read",
-      category: "Development"
-    },
-    {
-      id: 3,
-      title: "Typography in Web Design",
-      excerpt: "The impact of font choices on user experience and readability",
-      date: "2024-03-10",
-      readTime: "6 min read",
-      category: "Design"
-    },
-    {
-      id: 4,
-      title: "The Future of React",
-      excerpt: "Exploring upcoming features and trends in React development",
-      date: "2024-03-08",
-      readTime: "7 min read",
-      category: "Development"
-    },
-    {
-      id: 5,
-      title: "CSS Grid Mastery",
-      excerpt: "Advanced techniques for creating complex layouts with CSS Grid",
-      date: "2024-03-05",
-      readTime: "10 min read",
-      category: "Development"
-    },
-    {
-      id: 6,
-      title: "UX Writing Guidelines",
-      excerpt: "Best practices for writing user-friendly interface copy",
-      date: "2024-03-03",
-      readTime: "4 min read",
-      category: "Design"
+  const { ref, inView } = useInView();
+
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage
+  } = useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: postService.getAllPosts,
+    getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
+  });
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
     }
-  ]
+  }, [inView, fetchNextPage, hasNextPage]);
+
+  if (isLoading) return <PostGridSkeleton />;
+  if (error) return <ErrorMessage message="Failed to load posts" />;
 
   return (
     <div className="posts">
       <h1>All Posts</h1>
-      
       <div className="posts-grid">
-        {allPosts.map(post => (
-          <PostCard key={post.id} post={post} />
-        ))}
+        {data.pages.map((page) =>
+          page.posts.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))
+        )}
+      </div>
+      
+      <div ref={ref} style={{ height: '20px' }}>
+        {isFetchingNextPage && <PostGridSkeleton count={3} />}
       </div>
     </div>
-  )
+  );
 }
 
 function PostCard({ post }) {

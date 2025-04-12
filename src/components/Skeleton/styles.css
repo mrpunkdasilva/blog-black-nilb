@@ -1,0 +1,51 @@
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.post-skeleton {
+  padding: 1rem;
+  border-radius: 8px;
+  background: var(--card-bg);
+  margin-bottom: 1rem;
+}
+
+.skeleton-title,
+.skeleton-meta > div,
+.skeleton-content > div {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-title {
+  height: 2rem;
+  margin-bottom: 1rem;
+  width: 80%;
+}
+
+.skeleton-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.skeleton-author,
+.skeleton-date {
+  height: 1rem;
+  width: 100px;
+}
+
+.skeleton-content > div {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-content > div:nth-child(1) { width: 100%; }
+.skeleton-content > div:nth-child(2) { width: 90%; }
+.skeleton-content > div:nth-child(3) { width: 80%; }
