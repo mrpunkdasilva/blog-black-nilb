@@ -38,6 +38,7 @@ function EmptyState() {
 
 function Posts() {
   const { ref, inView } = useInView();
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const {
     data,
@@ -49,9 +50,7 @@ function Posts() {
     queryKey: ['posts'],
     queryFn: postService.getAllPosts,
     getNextPageParam: (lastPage) => lastPage.nextPage ?? undefined,
-    // Não tratar como erro se a resposta for vazia
     retry: false,
-    // Não mostrar toast de erro
     useErrorBoundary: false
   });
 
