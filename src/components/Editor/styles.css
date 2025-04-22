@@ -1,0 +1,68 @@
+.markdown-editor {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.editor-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 500px;
+}
+
+.markdown-input {
+  padding: 20px;
+  border: none;
+  border-right: 1px solid #ddd;
+  resize: none;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  outline: none;
+}
+
+.markdown-preview {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview h5,
+.markdown-preview h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.markdown-preview p {
+  margin: 1em 0;
+}
+
+.markdown-preview code {
+  background: #f5f5f5;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.markdown-preview pre {
+  background: #f5f5f5;
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.markdown-preview blockquote {
+  border-left: 4px solid #ddd;
+  margin: 0;
+  padding-left: 1em;
+  color: #666;
+}
+
+.markdown-preview img {
+  max-width: 100%;
+  height: auto;
+}

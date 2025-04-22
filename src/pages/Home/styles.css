@@ -41,124 +41,77 @@
 }
 
 .post-card {
-  background: var(--card-bg);
-  border-radius: 12px;
   padding: 2rem;
-  border: 1px solid var(--border-color);
-  position: relative;
-  overflow: hidden;
-
-  /* Configuração 3D melhorada */
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-
-  /* Sombra inicial suave */
-  box-shadow:
-    0 4px 8px rgba(0,0,0,0.05),
-    0 1px 3px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  background: var(--card-bg, #ffffff);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .post-card:hover {
-  box-shadow:
-    0 20px 25px rgba(0,0,0,0.1),
-    0 10px 10px rgba(0,0,0,0.04);
-}
-
-/* Efeito suave nos elementos internos */
-.post-card h3,
-.post-card p,
-.category-tag,
-.post-meta,
-.read-more {
-  transition: transform 0.3s ease;
-  transform: translateZ(50px);
-}
-
-.post-card:last-child {
-  border-bottom: none;
+  transform: translateY(-5px);
 }
 
 .category-tag {
-  position: absolute;
-  top: 1.5rem;  /* Ajustado para o novo padding */
-  right: 1.5rem;  /* Ajustado para o novo padding */
-  background: var(--accent-color);
-  color: white;
-  padding: 0.4rem 1rem;  /* Aumentado o padding */
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
   border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  z-index: 1;
+  background: var(--tag-bg, #f0f0f0);
+  color: var(--tag-color, #666);
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
 }
 
 .post-meta {
-  font-size: 0.9rem;
-  color: var(--text-color);
-  opacity: 0.7;
-  margin: 1.5rem 0;  /* Aumentado a margem */
   display: flex;
-  gap: 1.5rem;  /* Aumentado o gap */
-  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+  margin-bottom: 1rem;
 }
 
 .post-card h3 {
-  font-family: 'Lora', serif;
   font-size: 1.5rem;
-  margin-bottom: 1.2rem;  /* Aumentado a margem */
-  line-height: 1.4;  /* Aumentado o line-height */
-  word-wrap: break-word;
-  overflow-wrap: break-word;
+  margin-bottom: 1rem;
 }
 
 .post-card h3 a {
-  color: var(--primary-color);
+  color: var(--text-primary, #333);
   text-decoration: none;
-  transition: color 0.2s;
-}
-
-.post-card h3 a:hover {
-  color: var(--accent-color);
 }
 
 .post-card p {
-  color: var(--text-color);
-  line-height: 1.7;  /* Aumentado o line-height */
-  margin-bottom: 1.5rem;  /* Aumentado a margem */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  color: var(--text-secondary, #666);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
 .read-more {
-  display: inline-block;
-  margin-top: 1rem;  /* Aumentado a margem */
-  padding: 0.5rem 0;  /* Adicionado padding vertical */
-  color: var(--accent-color);
+  color: var(--primary-color);
+  text-decoration: none;
   font-weight: 500;
-  transition: all 0.2s;
-}
-
-.read-more:hover {
-  transform: translateX(5px);  /* Pequena animação no hover */
 }
 
 .view-all {
-  margin-top: 4rem;
   text-align: center;
+  margin-top: 3rem;
 }
 
 .view-all-link {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
   color: var(--primary-color);
   text-decoration: none;
-  font-size: 1.1rem;
-  transition: color 0.2s;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .view-all-link:hover {
-  color: var(--accent-color);
-  text-decoration: none;
+  background: var(--primary-color);
+  color: white;
 }
 
 /* Ajuste para dispositivos móveis */
@@ -264,4 +217,39 @@
 .post-card p,
 .post-meta {
   cursor: default;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 2px dashed var(--border-color);
+}
+
+.empty-state h3 {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.create-post-link {
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: #000000;
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.create-post-link:hover {
+  background-color: #333333;
+  transform: translateY(-2px);
 }

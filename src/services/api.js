@@ -2,14 +2,17 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:3000/api',  // Confirme se esta URL está correta
   timeout: 10000,
 });
 
 // Interceptor para requisições
 api.interceptors.request.use(
   (config) => {
-    // Aqui você pode adicionar headers, tokens etc
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
@@ -26,6 +29,37 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const authService = {
+  login: async (credentials) => {
+    try {
+      const response = await api.post('/auth/login', credentials);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      return response.data;
+    } catch (error) {
+      const message = error.response?.data?.message || 'Login failed';
+      throw new Error(message);
+    }
+  },
+
+  register: async (userData) => {
+    try {
+      const response = await api.post('/auth/register', userData);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      return response.data;
+    } catch (error) {
+      const message = error.response?.data?.message || 'Failed to create account';
+      throw new Error(message);
+    }
+  },
+
+  logout: () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+};
 
 export const postService = {
   getAllPosts: async ({ pageParam = 1 }) => {
@@ -52,12 +86,6 @@ export const postService = {
   updatePost: async ({ id, data }) => {
     const response = await api.put(`/posts/${id}`, data);
     toast.success('Post updated successfully!');
-    return response.data;
-  },
-
-  deletePost: async (id) => {
-    const response = await api.delete(`/posts/${id}`);
-    toast.success('Post deleted successfully!');
     return response.data;
   }
 };

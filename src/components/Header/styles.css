@@ -67,6 +67,28 @@
   width: 100%;
 }
 
+.username {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-right: 1rem;
+}
+
+.auth-nav-button {
+  background: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.auth-nav-button:hover {
+  background: var(--primary-color-dark);
+}
+
 @media (max-width: 768px) {
   .header {
     padding: 1rem;

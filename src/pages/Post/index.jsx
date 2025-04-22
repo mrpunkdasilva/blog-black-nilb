@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { postService } from '../../services/api';
 import { PostSkeleton } from '../../components/Skeleton';
 import ErrorMessage from '../../components/ErrorMessage';
@@ -32,10 +34,11 @@ function Post() {
         </div>
       </header>
 
-      <div 
-        className="post-content"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      <div className="post-content">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {post.content}
+        </ReactMarkdown>
+      </div>
     </article>
   );
 }

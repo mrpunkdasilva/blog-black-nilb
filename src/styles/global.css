@@ -9,6 +9,10 @@
   --hover-color: #f5f5f5;
   --border-color: rgba(0,0,0,0.1);
   
+  /* Adicionando variáveis para seleção de texto */
+  --selection-bg: #000000;
+  --selection-color: #ffffff;
+  
   /* Animações globais */
   --transition-speed: 0.3s;
 }
@@ -21,6 +25,10 @@
   --card-bg: #2c2c2c;
   --hover-color: #333333;
   --border-color: rgba(255,255,255,0.1);
+  
+  /* Mantendo a mesma seleção de texto no tema escuro */
+  --selection-bg: #000000;
+  --selection-color: #ffffff;
 }
 
 /* Animação de transição para troca de tema */

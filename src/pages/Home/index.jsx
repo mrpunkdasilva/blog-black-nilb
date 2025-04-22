@@ -5,40 +5,6 @@ import { PostGridSkeleton } from '../../components/Skeleton';
 import ErrorMessage from '../../components/ErrorMessage';
 import './styles.css';
 
-function Home() {
-  const { data: featuredPosts, isLoading, error } = useQuery({
-    queryKey: ['featuredPosts'],
-    queryFn: postService.getFeaturedPosts,
-  });
-
-  if (isLoading) return <PostGridSkeleton count={3} />;
-  if (error) return <ErrorMessage message="Failed to load featured posts" />;
-
-  return (
-    <div className="home">
-      <section className="hero">
-        <h1>Black Nib</h1>
-        <p className="subtitle">Thoughts on technology, design, and modern development</p>
-      </section>
-
-      <section className="featured-posts">
-        <h2>Latest Writing</h2>
-        <div className="posts-list">
-          {featuredPosts.map(post => (
-            <PostCard key={post._id} post={post} />
-          ))}
-        </div>
-        
-        <div className="view-all">
-          <Link to="/posts" className="view-all-link">
-            View all posts →
-          </Link>
-        </div>
-      </section>
-    </div>
-  );
-}
-
 function PostCard({ post }) {
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
@@ -73,18 +39,76 @@ function PostCard({ post }) {
     >
       <span className="category-tag">{post.category}</span>
       <div className="post-meta">
-        <span className="post-date">{post.date}</span>
-        <span className="post-read-time">{post.readTime}</span>
+        <span className="post-date">
+          {new Date(post.createdAt).toLocaleDateString()}
+        </span>
+        <span className="post-read-time">{post.readTime} min read</span>
       </div>
       <h3>
-        <Link to={`/post/${post.id}`}>{post.title}</Link>
+        <Link to={`/post/${post._id}`}>{post.title}</Link>
       </h3>
       <p>{post.excerpt}</p>
-      <Link to={`/post/${post.id}`} className="read-more">
+      <Link to={`/post/${post._id}`} className="read-more">
         Read more →
       </Link>
     </article>
   );
 }
 
-export default Home
+function EmptyState() {
+  return (
+    <div className="empty-state">
+      <h3>Welcome to Black Nib!</h3>
+      <p>Start exploring the world of technology and design with us.</p>
+    </div>
+  );
+}
+
+function Home() {
+  const { data: featuredPosts, isLoading } = useQuery({
+    queryKey: ['featuredPosts'],
+    queryFn: postService.getFeaturedPosts,
+    // Não tratar como erro se a resposta for vazia
+    retry: false,
+    // Não mostrar toast de erro
+    useErrorBoundary: false
+  });
+
+  const hasPosts = featuredPosts && featuredPosts.length > 0;
+
+  return (
+    <div className="home">
+      <section className="hero">
+        <h1>Black Nib</h1>
+        <p className="subtitle">Thoughts on technology, design, and modern development</p>
+      </section>
+
+      <section className="featured-posts">
+        <h2>Latest Writing</h2>
+        
+        {isLoading ? (
+          <PostGridSkeleton count={3} />
+        ) : (
+          <div className="posts-list">
+            {hasPosts ? (
+              <>
+                {featuredPosts.map(post => (
+                  <PostCard key={post._id} post={post} />
+                ))}
+                <div className="view-all">
+                  <Link to="/posts" className="view-all-link">
+                    View all posts →
+                  </Link>
+                </div>
+              </>
+            ) : (
+              <EmptyState />
+            )}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+}
+
+export default Home;
